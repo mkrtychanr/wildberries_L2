@@ -2,11 +2,12 @@ package main
 
 import (
 	"bufio"
-	"flag"
 	"fmt"
 	"os"
 	"sort"
 	"strconv"
+
+	"github.com/pborman/getopt"
 )
 
 func getFile(path string, uniqueRequred bool) ([]string, error) {
@@ -46,12 +47,12 @@ func toSort(data []string, n bool) []string {
 }
 
 func main() {
-	n := *flag.Bool("n", false, "сортировка по числовому значению")
-	r := *flag.Bool("r", false, "сортировка в обратном порядке")
-	u := *flag.Bool("u", false, "не выводить повторяющиеся строки")
-	flag.Parse()
-	filename := flag.Arg(0)
-	file, err := getFile(filename, u)
+	filename := getopt.String('f', "", "файл")
+	n := *getopt.Bool('n', "сортировка по числовому значению")
+	r := *getopt.Bool('r', "сортировка в обратном порядке")
+	u := *getopt.Bool('u', "не выводить повторяющиеся строки")
+	getopt.Parse()
+	file, err := getFile(*filename, u)
 	if err != nil {
 		panic(err)
 	}
