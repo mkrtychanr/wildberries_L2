@@ -47,7 +47,7 @@ func groupAnagrams(data []string) map[string][]string {
 }
 
 func main() {
-	res := groupAnagrams([]string{"тяпка", "пятак", "пятка"})
+	res := groupAnagrams([]string{"тяпка", "пятак", "пятка", "клоун", "локун"})
 	for key, value := range res {
 		fmt.Println(key, value)
 	}
