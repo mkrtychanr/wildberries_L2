@@ -28,7 +28,10 @@ func jsonError(respondText string) []byte {
 func makeJsonRespond(w http.ResponseWriter, code int, data []byte) {
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(code)
-	w.Write(data)
+	_, err := w.Write(data)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 func MiddlewareLogger(next http.HandlerFunc) http.HandlerFunc {
